@@ -12,8 +12,12 @@ COPY Gemfile Gemfile.lock ./
 # Install dependencies using Bundler
 RUN bundle install
 
+
 # Copy the rest of the application code into the container
 COPY . .
+
+# Copy other necessary files
+COPY config/credentials.yml.enc config/credentials.yml.enc
 
 # Set the environment variables
 ENV RAILS_ENV=production
