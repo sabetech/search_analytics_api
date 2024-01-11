@@ -20,7 +20,7 @@ COPY . .
 COPY config/credentials.yml.enc config/credentials.yml.enc
 
 # Set the environment variables
-ENV RAILS_ENV=production
+ENV RAILS_ENV=development
 
 # Expose the port on which the Rails server will run
 EXPOSE 3000
