@@ -5,15 +5,27 @@ class ArticlesController < ApplicationController
         render json: @articles
     end 
 
-    def search
-        # search from within redis
-        # if not found, search from within db
-        #then cache to redis
+    #use this to create some sample articles to test
+    def create
+        @article = Article.new(title: params[:title])
+        if @article.save
+            render json: @article
+        else
+            render json: {error: "Error creating article"}
+        end
+    end
 
-        if params[:search].blank?
+    def search
+        
+        #get IP address of user
+
+        client_ip = request.remote_ip
+        print "client ip is #{client_ip}\n"
+
+        if params[:searchterm].blank?
             render json: {error: "Empty field"}
         else
-            @articles = Article.search(params[:search])
+            @articles = Article.search(params[:searchterm])
             render json: @articles
         end
 
